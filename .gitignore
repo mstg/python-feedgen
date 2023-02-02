@@ -4,9 +4,9 @@ venv
 *.pyo
 *.swp
 
-feedgen/tests/tmp_Atomfeed.xml
+rssgen/tests/tmp_Atomfeed.xml
 
-feedgen/tests/tmp_Rssfeed.xml
+rssgen/tests/tmp_Rssfeed.xml
 
 tmp_Atomfeed.xml
 
@@ -15,3 +15,5 @@ tmp_Rssfeed.xml
 # testing artifacts
 .coverage
 *.egg-info/
+build
+dist

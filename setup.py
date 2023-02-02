@@ -3,20 +3,20 @@
 
 from setuptools import setup
 
-import feedgen.version
+import rssgen.version
 
-packages = ['feedgen', 'feedgen/ext']
+packages = ['rssgen']
 
-setup(name='feedgen',
+setup(name='rssgen',
       packages=packages,
-      version=feedgen.version.version_full_str,
-      description='Feed Generator (ATOM, RSS, Podcasts)',
-      author='Lars Kiesow',
-      author_email='lkiesow@uos.de',
-      url='https://lkiesow.github.io/python-feedgen',
-      keywords=['feed', 'ATOM', 'RSS', 'podcast'],
+      version=rssgen.version.version_full_str,
+      description='RSS Generator',
+      author='Mustafa Gezen',
+      author_email='mustafa@gezen.no',
+      url='https://github.com/mstg/rssgen',
+      keywords=['RSS'],
       license='FreeBSD and LGPLv3+',
-      install_requires=['lxml', 'python-dateutil'],
+      install_requires=['python-dateutil'],
       classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
@@ -28,7 +28,6 @@ setup(name='feedgen',
         'Natural Language :: English',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 3',
         'Topic :: Communications',
         'Topic :: Internet',
@@ -38,7 +37,7 @@ setup(name='feedgen',
         ],
       test_suite="tests",
       long_description='''\
-Feedgenerator
+Rssgenerator
 =============
 
 This module can be used to generate web feeds in both ATOM and RSS format. It

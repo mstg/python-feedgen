@@ -12,14 +12,14 @@ install:
   - pip install bandit flake8 python-coveralls coverage liccheck
   - pip install -r requirements.txt
   - python setup.py bdist_wheel
-  - pip install dist/feedgen*
+  - pip install dist/rssgen*
 
 script:
   - make test
   - liccheck -s .licenses.ini
-  - python -m feedgen
-  - python -m feedgen atom
-  - python -m feedgen rss
+  - python -m rssgen
+  - python -m rssgen atom
+  - python -m rssgen rss
 
 after_success:
    - coveralls

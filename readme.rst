@@ -1,13 +1,13 @@
 =============
-Feedgenerator
+Rssgenerator
 =============
 
-.. image:: https://travis-ci.org/lkiesow/python-feedgen.svg?branch=master
-    :target: https://travis-ci.org/lkiesow/python-feedgen
+.. image:: https://travis-ci.org/lkiesow/python-rssgen.svg?branch=master
+    :target: https://travis-ci.org/lkiesow/python-rssgen
     :alt: Build Status
 
-.. image:: https://coveralls.io/repos/github/lkiesow/python-feedgen/badge.svg?branch=master
-    :target: https://coveralls.io/github/lkiesow/python-feedgen?branch=master
+.. image:: https://coveralls.io/repos/github/lkiesow/python-rssgen/badge.svg?branch=master
+    :target: https://coveralls.io/github/lkiesow/python-rssgen?branch=master
     :alt: Test Coverage Status
 
 
@@ -21,9 +21,9 @@ at license.bsd and license.lgpl.
 
 More details about the project:
 
-- `Repository <https://github.com/lkiesow/python-feedgen>`_
-- `Documentation <https://lkiesow.github.io/python-feedgen/>`_
-- `Python Package Index <https://pypi.python.org/pypi/feedgen/>`_
+- `Repository <https://github.com/lkiesow/python-rssgen>`_
+- `Documentation <https://lkiesow.github.io/python-rssgen/>`_
+- `Python Package Index <https://pypi.python.org/pypi/rssgen/>`_
 
 
 ------------
@@ -35,27 +35,27 @@ Installation
 If your distribution includes this project as package, like Fedora Linux does,
 you can simply use your package manager to install the package. For example::
 
-    $ dnf install python3-feedgen
+    $ dnf install python3-rssgen
 
 
 **Using pip**
 
-You can also use pip to install the feedgen module. Simply run::
+You can also use pip to install the rssgen module. Simply run::
 
-    $ pip install feedgen
+    $ pip install rssgen
 
 
 -------------
 Create a Feed
 -------------
 
-To create a feed simply instantiate the FeedGenerator class and insert some
+To create a feed simply instantiate the RssGenerator class and insert some
 data:
 
 .. code-block:: python
 
-    from feedgen.feed import FeedGenerator
-    fg = FeedGenerator()
+    from rssgen.feed import RssGenerator
+    fg = RssGenerator()
     fg.id('http://lernfunk.de/media/654321')
     fg.title('Some Testfeed')
     fg.author( {'name':'John Doe','email':'john@example.de'} )
@@ -99,8 +99,8 @@ Add Feed Entries
 ----------------
 
 To add entries (items) to a feed you need to create new FeedEntry objects and
-append them to the list of entries in the FeedGenerator. The most convenient
-way to go is to use the FeedGenerator itself for the instantiation of the
+append them to the list of entries in the RssGenerator. The most convenient
+way to go is to use the RssGenerator itself for the instantiation of the
 FeedEntry object:
 
 .. code-block:: python
@@ -110,7 +110,7 @@ FeedEntry object:
     fe.title('The First Episode')
     fe.link(href="http://lernfunk.de/feed")
 
-The FeedGenerator's method `add_entry(...)` will generate a new FeedEntry
+The RssGenerator's method `add_entry(...)` will generate a new FeedEntry
 object, automatically append it to the feeds internal list of entries and
 return it, so that additional data can be added.
 
@@ -118,7 +118,7 @@ return it, so that additional data can be added.
 Extensions
 ----------
 
-The FeedGenerator supports extensions to include additional data into the XML
+The RssGenerator supports extensions to include additional data into the XML
 structure of the feeds. Extensions can be loaded like this:
 
 .. code-block:: python
@@ -149,8 +149,8 @@ To produce a podcast simply load the `podcast` extension:
 
 .. code-block:: python
 
-    from feedgen.feed import FeedGenerator
-    fg = FeedGenerator()
+    from rssgen.feed import RssGenerator
+    fg = RssGenerator()
     fg.load_extension('podcast')
     ...
     fg.podcast.itunes_category('Technology', 'Podcasting')
@@ -164,7 +164,7 @@ To produce a podcast simply load the `podcast` extension:
     fg.rss_str(pretty=True)
     fg.rss_file('podcast.xml')
 
-If the FeedGenerator class is used to load an extension, it is automatically
+If the RssGenerator class is used to load an extension, it is automatically
 loaded for every feed entry as well.  You can, however, load an extension for a
 specific FeedEntry only by calling `load_extension(...)` on that entry.
 
@@ -174,7 +174,7 @@ generation by calling the generating method with the keyword argument
 
 **Custom Extensions**
 
-If you want to load custom extensions which are not part of the feedgen
+If you want to load custom extensions which are not part of the rssgen
 package, you can use the method `register_extension` instead. You can directly
 pass the classes for the feed and the entry extension to this method meaning
 that you can define them everywhere.
@@ -186,8 +186,8 @@ Testing the Generator
 
 You can test the module by simply executing::
 
-    $ python -m feedgen
+    $ python -m rssgen
 
 If you want to have a look at the code for this test to have a working code
 example for a whole feed generation process, you can find it in the
-`__main__.py <https://github.com/lkiesow/python-feedgen/blob/master/feedgen/__main__.py>`_.
+`__main__.py <https://github.com/lkiesow/python-rssgen/blob/master/rssgen/__main__.py>`_.

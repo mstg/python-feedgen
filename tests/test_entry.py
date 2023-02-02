@@ -8,13 +8,13 @@ These are test cases for a basic entry.
 
 import unittest
 
-from feedgen.feed import FeedGenerator
+from rssgen.feed import RssGenerator
 
 
 class TestSequenceFunctions(unittest.TestCase):
 
     def setUp(self):
-        fg = FeedGenerator()
+        fg = RssGenerator()
         self.feedId = 'http://example.com'
         self.title = 'Some Testfeed'
 
@@ -42,19 +42,10 @@ class TestSequenceFunctions(unittest.TestCase):
         self.fg = fg
 
     def test_setEntries(self):
-        fg2 = FeedGenerator()
+        fg2 = RssGenerator()
         fg2.entry(self.fg.entry())
         assert len(fg2.entry()) == 3
         assert self.fg.entry() == fg2.entry()
-
-    def test_loadExtension(self):
-        fe = self.fg.add_item()
-        fe.id('1')
-        fe.title(u'…')
-        fe.content(u'…')
-        fe.load_extension('base')
-        assert fe.base
-        assert self.fg.atom_str()
 
     def test_checkEntryNumbers(self):
         fg = self.fg
@@ -113,7 +104,7 @@ class TestSequenceFunctions(unittest.TestCase):
         assert fg.entry()
 
     def test_removeEntryByIndex(self):
-        fg = FeedGenerator()
+        fg = RssGenerator()
         self.feedId = 'http://example.com'
         self.title = 'Some Testfeed'
 
@@ -125,7 +116,7 @@ class TestSequenceFunctions(unittest.TestCase):
         assert len(fg.entry()) == 0
 
     def test_removeEntryByEntry(self):
-        fg = FeedGenerator()
+        fg = RssGenerator()
         self.feedId = 'http://example.com'
         self.title = 'Some Testfeed'
 
@@ -138,7 +129,7 @@ class TestSequenceFunctions(unittest.TestCase):
         assert len(fg.entry()) == 0
 
     def test_categoryHasDomain(self):
-        fg = FeedGenerator()
+        fg = RssGenerator()
         fg.title('some title')
         fg.link(href='http://www.dontcare.com', rel='alternate')
         fg.description('description')
@@ -154,19 +145,8 @@ class TestSequenceFunctions(unittest.TestCase):
         result = fg.rss_str()
         assert b'domain="http://www.somedomain.com/category"' in result
 
-    def test_content_cdata_type(self):
-        fg = FeedGenerator()
-        fg.title('some title')
-        fg.id('http://lernfunk.de/media/654322/1')
-        fe = fg.add_entry()
-        fe.id('http://lernfunk.de/media/654322/1')
-        fe.title('some title')
-        fe.content('content', type='CDATA')
-        result = fg.atom_str()
-        assert b'<content type="CDATA"><![CDATA[content]]></content>' in result
-
     def test_summary_html_type(self):
-        fg = FeedGenerator()
+        fg = RssGenerator()
         fg.title('some title')
         fg.id('http://lernfunk.de/media/654322/1')
         fe = fg.add_entry()

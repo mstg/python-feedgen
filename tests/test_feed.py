@@ -11,17 +11,16 @@ import os
 import tempfile
 import unittest
 
-from lxml import etree
+from xml.etree import ElementTree as ET
 
-from feedgen.ext.dc import DcEntryExtension, DcExtension
-from feedgen.feed import FeedGenerator
+from rssgen.feed import RssGenerator
 
 
 class TestSequenceFunctions(unittest.TestCase):
 
     def setUp(self):
 
-        fg = FeedGenerator()
+        fg = RssGenerator()
 
         self.nsAtom = "http://www.w3.org/2005/Atom"
         self.nsRss = "http://purl.org/rss/1.0/modules/content/"
@@ -104,7 +103,7 @@ class TestSequenceFunctions(unittest.TestCase):
         fg.webMaster(self.webMaster)
         fg.updated('2017-02-05 13:26:58+01:00')
         fg.pubDate('2017-02-05 13:26:58+01:00')
-        fg.generator('python-feedgen', 'x', uri='http://github.com/lkie...')
+        fg.generator('python-rssgen', 'x', uri='http://github.com/lkie...')
         fg.image(url=self.logo,
                  title=self.title,
                  link=self.link2Href,
@@ -174,7 +173,7 @@ class TestSequenceFunctions(unittest.TestCase):
         fg = self.fg
         fg.link(links, replace=True)
         atomString = fg.atom_str(pretty=True, xml_declaration=False)
-        feed = etree.fromstring(atomString)
+        feed = ET.fromstring(atomString)
         nsAtom = self.nsAtom
         feed_links = feed.findall("{%s}link" % nsAtom)
         idx = 0
@@ -206,7 +205,7 @@ class TestSequenceFunctions(unittest.TestCase):
         fg = self.fg
         fg.link(links, replace=True)
         rssString = fg.rss_str(pretty=True, xml_declaration=False)
-        feed = etree.fromstring(rssString)
+        feed = ET.fromstring(rssString)
         channel = feed.find("channel")
         nsAtom = self.nsAtom
 
@@ -224,7 +223,7 @@ class TestSequenceFunctions(unittest.TestCase):
 
     def checkAtomString(self, atomString):
 
-        feed = etree.fromstring(atomString)
+        feed = ET.fromstring(atomString)
 
         nsAtom = self.nsAtom
 
@@ -271,33 +270,9 @@ class TestSequenceFunctions(unittest.TestCase):
         rssString = fg.rss_str(pretty=True, xml_declaration=False)
         self.checkRssString(rssString)
 
-    def test_loadPodcastExtension(self):
-        fg = self.fg
-        fg.add_entry()
-        fg.load_extension('podcast', atom=True, rss=True)
-        fg.add_entry()
-
-    def test_loadDcExtension(self):
-        fg = self.fg
-        fg.add_entry()
-        fg.load_extension('dc', atom=True, rss=True)
-        fg.add_entry()
-
-    def test_extensionAlreadyLoaded(self):
-        fg = self.fg
-        fg.load_extension('dc', atom=True, rss=True)
-        with self.assertRaises(ImportError):
-            fg.load_extension('dc')
-
-    def test_registerCustomExtension(self):
-        fg = self.fg
-        fg.add_entry()
-        fg.register_extension('dc', DcExtension, DcEntryExtension)
-        fg.add_entry()
-
     def checkRssString(self, rssString):
 
-        feed = etree.fromstring(rssString)
+        feed = ET.fromstring(rssString)
         nsAtom = self.nsAtom
 
         ch = feed.find("channel")
@@ -308,7 +283,7 @@ class TestSequenceFunctions(unittest.TestCase):
         assert ch.find("lastBuildDate").text is not None
         docs = "http://www.rssboard.org/rss-specification"
         assert ch.find("docs").text == docs
-        assert ch.find("generator").text == "python-feedgen"
+        assert ch.find("generator").text == "python-rssgen"
         assert ch.findall("{%s}link" % nsAtom)[0].get('href') == self.link2Href
         assert ch.findall("{%s}link" % nsAtom)[0].get('rel') == self.link2Rel
         assert ch.find("image").find("url").text == self.logo

@@ -1,4 +1,4 @@
-%global pypi_name feedgen
+%global pypi_name rssgen
 
 Name:           python-%{pypi_name}
 Version:        0.9.0
@@ -6,7 +6,7 @@ Release:        1%{?dist}
 Summary:        Feed Generator (ATOM, RSS, Podcasts)
 
 License:        BSD or LGPLv3
-URL:            http://lkiesow.github.io/python-feedgen
+URL:            http://lkiesow.github.io/python-rssgen
 Source0:        https://github.com/lkiesow/%{name}/archive/v%{version}.tar.gz
 BuildArch:      noarch
 
@@ -21,7 +21,7 @@ BuildRequires:  python3-lxml
 BuildRequires:  python3-setuptools
 
 %description
-Feedgenerator This module can be used to generate web feeds in both ATOM and
+Rssgenerator This module can be used to generate web feeds in both ATOM and
 RSS format. It has support for extensions. Included is for example an extension
 to produce Podcasts.
 
@@ -32,7 +32,7 @@ Summary:        %{summary}
 Requires:       python2-dateutil
 Requires:       python2-lxml
 %description -n python2-%{pypi_name}
-Feedgenerator This module can be used to generate web feeds in both ATOM and
+Rssgenerator This module can be used to generate web feeds in both ATOM and
 RSS format. It has support for extensions. Included is for example an extension
 to produce Podcasts.
 
@@ -43,7 +43,7 @@ Summary:        %{summary}
 Requires:       python3-dateutil
 Requires:       python3-lxml
 %description -n python3-%{pypi_name}
-Feedgenerator This module can be used to generate web feeds in both ATOM and
+Rssgenerator This module can be used to generate web feeds in both ATOM and
 RSS format. It has support for extensions. Included is for example an extension
 to produce Podcasts.
 

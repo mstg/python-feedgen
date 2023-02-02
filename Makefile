@@ -6,9 +6,9 @@ bdist_wheel: doc
 
 clean: doc-clean
 	@echo Removing binary files...
-	@rm -f `find feedgen -name '*.pyc'`
-	@rm -f `find feedgen -name '*.pyo'`
-	@rm -rf feedgen.egg-info/ build/
+	@rm -f `find rssgen -name '*.pyc'`
+	@rm -f `find rssgen -name '*.pyo'`
+	@rm -rf rssgen.egg-info/ build/
 	@echo Removing source distribution files...
 	@rm -rf dist/
 	@rm -f MANIFEST
@@ -49,6 +49,6 @@ publish:
 	twine upload dist/*
 
 test:
-	coverage run --source=feedgen -m unittest discover -s tests
-	flake8 $$(find setup.py tests feedgen -name '*.py')
-	bandit -r feedgen
+	coverage run --source=rssgen -m unittest discover -s tests
+	flake8 $$(find setup.py tests rssgen -name '*.py')
+	bandit -r rssgen
